@@ -96,7 +96,7 @@ class ForYouScreenScreenshotTests {
         captureMultiDevice("ForYouScreenLoading") {
             NiaTheme {
                 ForYouScreen(
-                    isSyncing = false,
+                    isSyncing = true,
                     onboardingUiState = Loading,
                     feedState = NewsFeedUiState.Loading,
                     onTopicCheckedChanged = { _, _ -> },
@@ -196,6 +196,8 @@ class ForYouScreenScreenshotTests {
 
 
 // runs test configuration 2
+
+
 
 
 
