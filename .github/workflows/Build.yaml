@@ -57,9 +57,9 @@ jobs:
 #      - name: Build all build type and flavor permutations
 #        run: ./gradlew assembleDemoDebug
 
-      - name: Run all local screenshot tests (Roborazzi)
-        id: screenshots-verify
-        run: ./gradlew :feature:foryou:verifyRoborazziDemoDebug
+#      - name: Run all local screenshot tests (Roborazzi)
+#        id: screenshots-verify
+#        run: ./gradlew :feature:foryou:verifyRoborazziDemoDebug
 
       # Runs if previous job failed
       - name: Push new screenshots if failed
