@@ -47,4 +47,4 @@ sealed interface MainActivityUiState {
     data class Success(val userData: UserData) : MainActivityUiState
 }
 
- // test
+ // test testDebugUnitTest
