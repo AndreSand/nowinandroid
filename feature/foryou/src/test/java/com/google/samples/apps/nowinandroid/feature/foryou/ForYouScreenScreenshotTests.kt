@@ -182,7 +182,7 @@ class ForYouScreenScreenshotTests {
             }
         }
         composeTestRule.onRoot()
-            .captureRoboImage("../../screenshots/${screenshotName}_$deviceName.png")
+            .captureRoboImage("../../screenshots/andres33.png")
     }
 
     private fun extractSpecs(deviceSpec: String): List<Int> {
