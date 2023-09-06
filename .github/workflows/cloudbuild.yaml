@@ -22,11 +22,12 @@ steps:
     volumes:
       - name: 'vol1'
         path: '/persistent_volume'
-    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew app:prodBenchmarkOssLicensesTask']
+    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew assemble']
 
 
     #works
     #./gradlew feature:foryou:assembleProdDebug
+    #./gradlew app:prodBenchmarkOssLicensesTask
 
     #fails
     #./gradlew assemble
