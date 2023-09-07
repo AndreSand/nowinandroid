@@ -18,11 +18,7 @@ steps:
 #    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew lintDemoDebug']
   # Run Assemble with Gradle Image from mounted /persistent_volume using name: vol1
   - id: 'run-assemble'
-#  # cache https://cloud.google.com/build/docs/optimize-builds/speeding-up-builds?_ga=2.90748954.-1879150275.1693767032#using_custom_virtual_machine_sizes
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '--cache-from', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '.']
-images: ['us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1']
-  - name: 'gcr.io/cloud-builders/docker'
+    name: 'gcr.io/cloud-builders/docker'
     volumes:
       - name: 'vol1'
         path: '/persistent_volume'
