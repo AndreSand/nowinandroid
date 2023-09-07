@@ -10,12 +10,12 @@ steps:
         path: '/persistent_volume'
     args: ['cp', '-a', '.', '/persistent_volume']
   # Run Lint with Gradle Image from mounted /persistent_volume using name: vol1
-#  - id: 'run-lint'
-#    name: 'gcr.io/cloud-builders/docker'
-#    volumes:
-#      - name: 'vol1'
-#        path: '/persistent_volume'
-#    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew lintDemoDebug']
+  - id: 'run-lint'
+    name: 'gcr.io/cloud-builders/docker'
+    volumes:
+      - name: 'vol1'
+        path: '/persistent_volume'
+    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew :app:lintProdRelease :app-nia-catalog:lintRelease :lint:lint']
   # Run Assemble with Gradle Image from mounted /persistent_volume using name: vol1
   - id: 'run-assemble'
     name: 'gcr.io/cloud-builders/docker'
@@ -23,13 +23,19 @@ steps:
       - name: 'vol1'
         path: '/persistent_volume'
     args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew assemble']
+  # Run Lint with Gradle Image from mounted /persistent_volume using name: vol1
+  - id: 'run-lint'
+    name: 'gcr.io/cloud-builders/docker'
+    volumes:
+      - name: 'vol1'
+        path: '/persistent_volume'
+    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew packageDemoDebug packageDemoDebugAndroidTest']
 timeout: 7200s
 
 
     #works
     #./gradlew feature:foryou:assembleProdDebug
     #./gradlew app:prodBenchmarkOssLicensesTask
-
-    #fails
     #./gradlew assemble
-    # task fails :app:prodBenchmarkOssLicensesTask
+    # lintDemoDebug
+  
