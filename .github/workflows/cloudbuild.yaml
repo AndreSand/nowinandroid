@@ -1,6 +1,7 @@
 # cloudbuild.yaml
 # Triggers Google Cloud Build CI pipeline
 # Build history go to console https://cloud.google.com/build
+#args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew :app:lintProdRelease :app-nia-catalog:lintRelease :lint:lint']
 steps:
   # Set a persistent volume according to https://cloud.google.com/cloud-build/docs/build-config (search for volumes)
   - id: 'ubuntu'
@@ -15,21 +16,21 @@ steps:
     volumes:
       - name: 'vol1'
         path: '/persistent_volume'
-    args: ['run', '-v', 'vol1:/home/app', '--rm', 'gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew :app:lintProdRelease :app-nia-catalog:lintRelease :lint:lint']
+    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew :app:lintProdRelease :app-nia-catalog:lintRelease :lint:lint']
   # Run Assemble with Gradle Image from mounted /persistent_volume using name: vol1
   - id: 'run-assemble'
     name: 'gcr.io/cloud-builders/docker'
     volumes:
       - name: 'vol1'
         path: '/persistent_volume'
-    args: ['run', '-v', 'vol1:/home/app', '--rm', 'gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew assemble']
+    args: ['run', '-v', 'vol1:/home/app', '--rm', 'android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew assemble']
   # Run Lint with Gradle Image from mounted /persistent_volume using name: vol1
   - id: 'run-package'
     name: 'gcr.io/cloud-builders/docker'
     volumes:
       - name: 'vol1'
         path: '/persistent_volume'
-    args: ['run', '-v', 'vol1:/home/app', '--rm', 'gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew packageDemoDebug packageDemoDebugAndroidTest']
+    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew packageDemoDebug packageDemoDebugAndroidTest']
 timeout: 7200s
 
     #works
