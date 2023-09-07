@@ -24,7 +24,7 @@ steps:
         path: '/persistent_volume'
     args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew assemble']
   # Run Lint with Gradle Image from mounted /persistent_volume using name: vol1
-  - id: 'run-lint'
+  - id: 'run-package'
     name: 'gcr.io/cloud-builders/docker'
     volumes:
       - name: 'vol1'
@@ -38,4 +38,3 @@ timeout: 7200s
     #./gradlew app:prodBenchmarkOssLicensesTask
     #./gradlew assemble
     # lintDemoDebug
-  
