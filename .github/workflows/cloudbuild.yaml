@@ -31,7 +31,7 @@ steps:
     name: 'us.gcr.io/android-build:tag1'
     volumes:
       - name: 'vol1'
-       path: '/persistent_volume'
+        path: '/persistent_volume'
     args: ["./gradlew", "packageDemoDebug","packageDemoDebugAndroidTest"]
 #    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew packageDemoDebug packageDemoDebugAndroidTest']
 
