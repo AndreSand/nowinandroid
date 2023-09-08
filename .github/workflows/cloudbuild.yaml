@@ -23,19 +23,13 @@ steps:
     #    volumes:
     #      - name: 'vol1'
     #        path: '/persistent_volume'
-    args:
-      - '-c'
-      - |
-        ./gradlew testDemoDebug testProdDebug
+    args: ["./gradlew", "testDemoDebug","testProdDebug"]
 #    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew testDemoDebug testProdDebug']
 
   # Run Lint with Gradle Image from mounted /persistent_volume using name: vol1
   - id: 'run-package'
     name: 'gcr.io/cloud-builders/docker'
-    args:
-      - '-c'
-      - |
-        ./gradlew packageDemoDebug packageDemoDebugAndroidTest
+    args: ["./gradlew", "packageDemoDebug","packageDemoDebugAndroidTest"]
 
 #    volumes:
 #      - name: 'vol1'
