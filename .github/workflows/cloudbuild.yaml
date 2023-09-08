@@ -19,21 +19,20 @@ steps:
     args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew :app:lintProdRelease :app-nia-catalog:lintRelease :lint:lint']
   # Run Assemble with Gradle Image from mounted /persistent_volume using name: vol1
   - id: 'run-tests'
-    name: 'gcr.io/cloud-builders/docker'
-    #    volumes:
-    #      - name: 'vol1'
-    #        path: '/persistent_volume'
+    name: 'us.gcr.io/android-build:tag1'
+        volumes:
+          - name: 'vol1'
+            path: '/persistent_volume'
     args: ["./gradlew", "testDemoDebug","testProdDebug"]
 #    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew testDemoDebug testProdDebug']
 
   # Run Lint with Gradle Image from mounted /persistent_volume using name: vol1
   - id: 'run-package'
-    name: 'gcr.io/cloud-builders/docker'
+    name: 'us.gcr.io/android-build:tag1'
+        volumes:
+          - name: 'vol1'
+            path: '/persistent_volume'
     args: ["./gradlew", "packageDemoDebug","packageDemoDebugAndroidTest"]
-
-#    volumes:
-#      - name: 'vol1'
-#        path: '/persistent_volume'
 #    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew packageDemoDebug packageDemoDebugAndroidTest']
 
   # Push the APK Output from vol1 to your GCS Bucket with Short Commit SHA.
