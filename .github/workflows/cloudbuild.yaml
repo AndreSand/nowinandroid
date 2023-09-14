@@ -10,15 +10,22 @@ steps:
       - name: 'vol1'
         path: '/persistent_volume'
     args: ['cp', '-a', '.', '/persistent_volume']
-  # Run Lint with Gradle Image from mounted /persistent_volume using name: vol1
-  - id: 'run-lint'
+  # Run Assemble with Gradle Image from mounted /persistent_volume using name: vol1
+  - id: 'run-assemble'
     name: 'gcr.io/cloud-builders/docker'
     volumes:
       - name: 'vol1'
         path: '/persistent_volume'
     args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew :app:assembleDemoDebug']
-#    images: ["us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1"]
-  # Run Assemble with Gradle Image from mounted /persistent_volume using name: vol1
+  #    images: ["us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1"]
+  # Run Lint
+  - id: 'run-lint'
+    name: 'gcr.io/cloud-builders/docker'
+    volumes:
+      - name: 'vol1'
+        path: '/persistent_volume'
+    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew :app:lintProdRelease :app-nia-catalog:lintRelease :lint:lint']
+  # Run testDemoDebug
   - id: 'run-tests'
     name: 'gcr.io/cloud-builders/docker'
     volumes:
@@ -26,7 +33,7 @@ steps:
         path: '/persistent_volume'
     args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew testDemoDebug testProdDebug']
 
-#  # Run Lint with Gradle Image from mounted /persistent_volume using name: vol1
+  # Run packageDemoDebug
   - id: 'run-package'
     name: 'gcr.io/cloud-builders/docker'
     volumes:
