@@ -12,7 +12,8 @@ steps:
     args: ['cp', '-a', '.', '/persistent_volume']
 
   # get the cache from cloud storage
-  - name: 'gcr.io/cloud-builders/gsutil'
+  - id: 'get-cahce'
+    name: 'gcr.io/cloud-builders/gsutil'
     args: ['cp', 'gs://android-cloud-apk-builds/cache.tgz', 'cache.tgz']
   # Run Assemble with Gradle Image from mounted /persistent_volume using name: vol1
 #  - id: 'run-assemble'
@@ -39,8 +40,8 @@ steps:
     args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew packageDemoDebug']
 
   # Add Gradle cache
-  - name: 'gcr.io/cloud-builders/gsutil'
-    id: 'Storing gradle cache'
+  - id: 'add-cahce'
+    name: 'gcr.io/cloud-builders/gsutil'
     args: ['cp', 'cache.tgz', 'gs://android-cloud-apk-builds/cache.tgz']
   -
   # Upload Lint test results TODO: change test results bucket
