@@ -16,7 +16,7 @@ steps:
     volumes:
       - name: 'vol1'
         path: '/persistent_volume'
-    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us.gcr.io/android-devrel-ci/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew :app:assembleDemoDebug']
+    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us.gcr.io/android-devrel-ci/android-build', '/bin/sh', '-c', 'cd /home/app && ./gradlew :app:assembleDemoDebug']
 #images: ["us.gcr.io/android-devrel-ci/android-build:tag1"]
   # Run Lint
   - id: 'run-lint'
@@ -24,14 +24,14 @@ steps:
     volumes:
       - name: 'vol1'
         path: '/persistent_volume'
-    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us.gcr.io/android-devrel-ci/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew :app:lintProdRelease :app-nia-catalog:lintRelease :lint:lint']
+    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us.gcr.io/android-devrel-ci/android-build', '/bin/sh', '-c', 'cd /home/app && ./gradlew :app:lintProdRelease :app-nia-catalog:lintRelease :lint:lint']
   # Run testDemoDebug
   - id: 'run-tests'
     name: 'gcr.io/cloud-builders/docker'
     volumes:
       - name: 'vol1'
         path: '/persistent_volume'
-    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us.gcr.io/android-devrel-ci/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew testDemoDebug testProdDebug']
+    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us.gcr.io/android-devrel-ci/android-build', '/bin/sh', '-c', 'cd /home/app && ./gradlew testDemoDebug testProdDebug']
 
   # Run packageDemoDebug
   - id: 'run-package'
@@ -39,7 +39,7 @@ steps:
     volumes:
       - name: 'vol1'
         path: '/persistent_volume'
-    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us.gcr.io/android-devrel-ci/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew packageDemoDebug packageDemoDebugAndroidTest']
+    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us.gcr.io/android-devrel-ci/android-build', '/bin/sh', '-c', 'cd /home/app && ./gradlew packageDemoDebug packageDemoDebugAndroidTest']
 
   # Push the APK Output from vol1 to your GCS Bucket with Short Commit SHA.
   - id: 'upload-apks'
