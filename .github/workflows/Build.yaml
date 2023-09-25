@@ -40,6 +40,9 @@ jobs:
       - name: Check lint
         run: ./gradlew lintDemoDebug
 
+      - name: Run Android tests on FTL managed device
+        run: ./gradlew app:myFtlDeviceDemoDebugAndroidTest
+
       - name: Build all build type and flavor permutations
         run: ./gradlew assemble
 
