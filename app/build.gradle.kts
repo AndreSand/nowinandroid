@@ -24,6 +24,7 @@ plugins {
     id("jacoco")
     id("nowinandroid.android.application.firebase")
     id("com.google.android.gms.oss-licenses-plugin")
+    id("com.google.firebase.testlab")
 }
 
 android {
@@ -71,12 +72,36 @@ android {
             excludes.add("/META-INF/{AL2.0,LGPL2.1}")
         }
     }
+    firebaseTestLab {
+        serviceAccountCredentials = file("file.json")
+
+        managedDevices {
+            create("myFtlDevice") {
+                device = "Pixel2"
+                apiLevel = 29
+            }
+        }
+    }
     testOptions {
         unitTests {
             isIncludeAndroidResources = true
         }
+        managedDevices {
+            devices {
+                maybeCreate<com.android.build.api.dsl.ManagedVirtualDevice>("pixel2api30").apply {
+                    // Use device profiles you typically see in Android Studio.
+                    device = "Pixel 2"
+                    // ATDs currently support only API level 30.
+                    apiLevel = 30
+                    // You can also specify "google-atd" if you require Google Play Services.
+                    systemImageSource = "aosp-atd"
+                }
+
+            }
+        }
+
+        namespace = "com.google.samples.apps.nowinandroid"
     }
-    namespace = "com.google.samples.apps.nowinandroid"
 }
 
 dependencies {

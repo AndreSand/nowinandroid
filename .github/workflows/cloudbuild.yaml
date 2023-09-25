@@ -32,7 +32,13 @@ steps:
       - name: 'vol1'
         path: '/persistent_volume'
     args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew testDemoDebug testProdDebug']
-
+  # Run FTL
+  - id: 'run-ftl'
+    name: 'gcr.io/cloud-builders/docker'
+    volumes:
+      - name: 'vol1'
+        path: '/persistent_volume'
+    args: ['run', '-v', 'vol1:/home/app', '--rm', 'us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew app:myFtlDeviceDemoDebugAndroidTest']
   # Run packageDemoDebug
   - id: 'run-package'
     name: 'gcr.io/cloud-builders/docker'
