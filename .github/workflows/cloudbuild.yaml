@@ -16,7 +16,7 @@ steps:
     volumes:
       - name: 'vol1'
         path: '/persistent_volume'
-    args: ['run', '-v', 'vol1:/home/app', '--rm', 'android-devrel-ci/us.gcr.io/android-build:tag1', '/bin/sh', '-c', 'cd /home/app && ./gradlew :app:assembleDemoDebug']
+    args: ['run', '-v', 'vol1:/home/app', '--rm', 'android-devrel-ci/us.gcr.io/android-build', '/bin/sh', '-c', 'cd /home/app && ./gradlew :app:assembleDemoDebug']
   #    images: ["us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag1"]
   # android-devrel-ci/us.gcr.io/android-build
   # Run Lint
