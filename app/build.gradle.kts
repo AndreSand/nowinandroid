@@ -73,7 +73,7 @@ android {
         }
     }
     firebaseTestLab {
-        serviceAccountCredentials = file("file.json")
+        serviceAccountCredentials.set(file("file.json"))
 
         managedDevices {
             create("myFtlDevice") {
