@@ -38,7 +38,7 @@ jobs:
         env:
           PLAY_FILE: ${{ secrets.PLAY_FILE }}
         run: |
-          echo $PLAY_FILE > /app/file.json
+          echo $PLAY_FILE > ./app/file.json
           find . -name file.json
 
       - name: Run Android tests on FTL managed device
