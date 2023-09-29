@@ -40,6 +40,12 @@ jobs:
       - name: Check lint
         run: ./gradlew lintDemoDebug
 
+      - name: Get JSON file
+        env:
+          PLAY_FILE: ${{ secrets.PLAY_FILE }}
+        run: |
+          echo PLAY_FILE > file.json
+
       - name: Run Android tests on FTL managed device
         run: ./gradlew app:myFtlDeviceDemoDebugAndroidTest
 
