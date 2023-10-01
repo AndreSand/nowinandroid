@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  ftl-run:
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
@@ -39,7 +39,6 @@ jobs:
           PLAY_FILE: ${{ secrets.PLAY_FILE }}
         run: |
           echo $PLAY_FILE > ./app/file.json
-          find . -name file.json
 
       - name: Run Android tests on FTL managed device
         run: ./gradlew app:myFtlDeviceDemoDebugAndroidTest
