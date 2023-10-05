@@ -77,7 +77,8 @@ android {
 
         managedDevices {
             create("myFtlDevice") {
-                device = "Pixel7"
+                // Pixel 7
+                device = "panther"
                 apiLevel = 33
             }
         }
