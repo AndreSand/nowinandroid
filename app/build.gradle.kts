@@ -77,8 +77,8 @@ android {
 
         managedDevices {
             create("myFtlDevice") {
-                device = "Pixel2"
-                apiLevel = 29
+                device = "Pixel7"
+                apiLevel = 33
             }
         }
     }
