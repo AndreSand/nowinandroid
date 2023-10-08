@@ -27,13 +27,13 @@ android {
     firebaseTestLab {
 //        serviceAccountCredentials.set(file("file.json"))
 
-        managedDevices {
-            create("myFtlDevice") {
-                // Pixel 7
-                device = "panther"
-                apiLevel = 33
-            }
-        }
+//        managedDevices {
+//            create("myFtlDevice") {
+//                // Pixel 7
+//                device = "panther"
+//                apiLevel = 33
+//            }
+//        }
     }
 }
 
