@@ -41,4 +41,5 @@ jobs:
           echo $PLAY_FILE > ./app/file.json
 
       - name: Run Android tests on FTL managed device
-        run: ./gradlew app:myFtlDeviceDemoDebugAndroidTest
+        run: ./gradlew myFtlDeviceDemoDebugAndroidTest
+        #run: ./gradlew app:myFtlDeviceDemoDebugAndroidTest
