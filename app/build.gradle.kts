@@ -81,6 +81,12 @@ android {
                 device = "panther"
                 apiLevel = 33
             }
+
+            testOptions {
+                execution {
+                    numUniformShards = 3
+                }
+            }
         }
     }
     testOptions {
