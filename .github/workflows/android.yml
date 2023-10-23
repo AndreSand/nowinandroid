@@ -44,6 +44,12 @@ jobs:
         run: ./gradlew app:myFtlDeviceDemoDebugAndroidTest
 #        run: ./gradlew myFtlDeviceDemoDebugAndroidTest
 
+      - name: Get JSON file
+        env:
+          PLAY_FILE: ${{ secrets.PLAY_FILE }}
+        run: |
+          echo $PLAY_FILE > ./app/file.json
+          
       - name: Foryou Android tests on FTL managed device
         run: ./gradlew feature:foryou:myFtlDeviceDemoDebugAndroidTest
 
