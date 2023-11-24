@@ -37,6 +37,20 @@ jobs:
       - name: Check spotless
         run: ./gradlew spotlessCheck --init-script gradle/init.gradle.kts --no-configuration-cache
 
+      - name: Check lint
+        run: ./gradlew lintDemoDebug
+
+      - name: Get JSON file
+        env:
+          PLAY_FILE: ${{ secrets.PLAY_FILE }}
+        run: |
+          echo $PLAY_FILE > ./app/file.json
+          find . -name file.json
+          find . -name test.json
+
+      - name: Run Android tests on FTL managed device
+        run: ./gradlew app:myFtlDeviceDemoDebugAndroidTest
+
       - name: Build all build type and flavor permutations
         run: ./gradlew assemble
 
