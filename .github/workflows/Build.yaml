@@ -148,7 +148,8 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-
+      - name: Accept Android licenses
+        run: yes | "$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
       - name: Run instrumented tests with GMD
         run: ./gradlew ${{matrix.device-config}}DemoDebugAndroidTest --no-parallel --max-workers=1
