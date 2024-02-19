@@ -116,12 +116,21 @@ jobs:
       - name: Check badging
         run: ./gradlew :app:checkProdReleaseBadging
 
+      - name: Accept Android licenses
+        run: yes | "$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
+      - name: Build AndroidTest apps
+        run: ./gradlew packageDemoDebug packageDemoDebugAndroidTest
+
   androidTest-GMD:
     runs-on: macOS-latest # enables hardware acceleration in the virtual machine
     timeout-minutes: 90
     strategy:
       matrix:
-        device-config: [ "pixel4api30aospatd","pixel6api31aosp","pixelCapi30aospatd" ]
+        device-config: [ "pixel4api30aospatd","pixel6api31aosp","pixelCapi30aospatd",
+                         "pixel4api30aospatd","pixel6api31aosp","pixelCapi30aospatd",
+                         "pixel4api30aospatd","pixel6api31aosp","pixelCapi30aospatd",
+                         "pixel4api30aospatd","pixel6api31aosp","pixelCapi30aospatd" ]
 
     steps:
       - name: Checkout
@@ -139,11 +148,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Accept Android licenses
-        run: yes | "$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
-      - name: Build AndroidTest apps
-        run: ./gradlew packageDemoDebug packageDemoDebugAndroidTest
 
       - name: Run instrumented tests with GMD
         run: ./gradlew ${{matrix.device-config}}DemoDebugAndroidTest --no-parallel --max-workers=1
