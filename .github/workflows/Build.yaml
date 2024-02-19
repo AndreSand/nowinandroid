@@ -154,25 +154,4 @@ jobs:
       - name: Run instrumented tests with GMD
         run: ./gradlew ${{matrix.device-config}}DemoDebugAndroidTest --no-parallel --max-workers=1
           -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect" -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
-
-      - name: set NOW
-        run: |
-          echo "::set-env name=NOW::$(date +'%Y-%m-%dT%H:%M:%S')"
-
-      - name: Upload test reports
-        if: success() || failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-reports-GMD
-          path: '**/build/reports/androidTests/${{ env.NOW }}'
-
-      - name: Print disk space usage
-        if: failure()
-        run: df -h
-
-      - name: Upload test reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-reports-${{matrix.device-config}}
-          path: '**/build/reports/androidTests'
+      
