@@ -119,6 +119,9 @@ jobs:
   androidTest-GMD:
     runs-on: macOS-latest # enables hardware acceleration in the virtual machine
     timeout-minutes: 90
+    strategy:
+      matrix:
+        device-config: [ "pixel4api30aospatd","pixel6api31aosp","pixelCapi30aospatd" ]
 
     steps:
       - name: Checkout
@@ -143,7 +146,7 @@ jobs:
         run: ./gradlew packageDemoDebug packageDemoDebugAndroidTest
 
       - name: Run instrumented tests with GMD
-        run: ./gradlew ciDemoDebugAndroidTest --no-parallel --max-workers=1
+        run: ./gradlew ${{matrix.device-config}}DemoDebugAndroidTest --no-parallel --max-workers=1
           -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect" -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
 
       - name: Upload test reports
@@ -161,5 +164,5 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-reports-${{ matrix.api-level }}
+          name: test-reports-${{matrix.device-config}}
           path: '**/build/reports/androidTests'
