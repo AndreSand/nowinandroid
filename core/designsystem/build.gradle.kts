@@ -47,7 +47,6 @@ dependencies {
     testImplementation(libs.roborazzi)
     testImplementation(projects.core.screenshotTesting)
     testImplementation(projects.core.testing)
-    implementation("com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava")
 
     androidTestImplementation(libs.androidx.compose.ui.test)
     androidTestImplementation(projects.core.testing)
