@@ -2,7 +2,7 @@
 accompanist = "0.34.0"
 androidDesugarJdkLibs = "2.0.4"
 # AGP and tools should be updated together
-androidGradlePlugin = "8.4.0"
+androidGradlePlugin = "8.4.1"
 androidTools = "31.4.0"
 androidxActivity = "1.8.2"
 androidxAppCompat = "1.6.1"
@@ -154,7 +154,7 @@ room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", vers
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidxMacroBenchmark"}
+baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidxMacroBenchmark" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsPlugin" }
 firebase-perf = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerfPlugin" }
