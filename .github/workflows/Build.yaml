@@ -223,14 +223,14 @@ jobs:
 
       - name: Set Release Time
         run: |
-          echo "date=$(date --rfc-3339=seconds)" >> $GITHUB_ENV
-          echo "time=${RELEASE_TIME:0:2}" >> $GITHUB_ENV 
+          echo "RELEASE_TIME=$(date --rfc-3339=seconds)" >> $RELEASE_TIME
+          echo "time=${RELEASE_TIME:0:2}" >> $GITHUB_ENV_sec 
 
       - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-reports-${{ matrix.api-level}}-${{time}}
+          name: test-reports-${{ matrix.api-level}}-${{env.GITHUB_ENV_sec}}
           path: '**/build/reports/androidTests'
 
       - name: Display local test coverage (only API 30)
