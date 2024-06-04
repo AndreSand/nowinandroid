@@ -221,17 +221,17 @@ jobs:
         if: matrix.api-level == 30
         run: ./gradlew createDemoDebugCombinedCoverageReport
 
-      - name: Set Release Time
-        run: |
-          echo "RELEASE_TIME=$(date --rfc-3339=seconds)" >> $GITHUB_RELEASE_TIME
-          echo "time=${env.GITHUB_RELEASE_TIME:0:2}" >> $GITHUB_ENV_sec 
-
-      - name: Upload test reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-reports-${{ matrix.api-level}}-${{env.GITHUB_ENV_sec}}
-          path: '**/build/reports/androidTests'
+#      - name: Set Release Time
+#        run: |
+#          echo "RELEASE_TIME=$(date --rfc-3339=seconds)" >> $GITHUB_RELEASE_TIME
+#          echo "time=${env.GITHUB_RELEASE_TIME:0:2}" >> $GITHUB_ENV_sec
+#
+#      - name: Upload test reports
+#        if: always()
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: test-reports-${{ matrix.api-level}}-${{env.GITHUB_ENV_sec}}
+#          path: '**/build/reports/androidTests'
 
       - name: Display local test coverage (only API 30)
         if: matrix.api-level == 30
