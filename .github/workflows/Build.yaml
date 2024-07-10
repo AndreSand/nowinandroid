@@ -205,7 +205,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: testResults
-          path: app/build/reports/androidTests/managedDevice/allDevices
+          path: app/build/reports/androidTests/managedDevice/debug/flavors/demo/allDevices/index.html
 
 #      - name: Build projects and run instrumentation tests
 #        uses: reactivecircus/android-emulator-runner@v2
