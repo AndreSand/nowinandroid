@@ -198,11 +198,14 @@ jobs:
         run: ./gradlew ${{matrix.device-config}}DemoDebugAndroidTest --no-parallel --max-workers=1
           -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect" -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
 
+      - name: Rename test report
+        run: mv app/build/reports/androidTests/managedDevice/debug/flavors/demo/allDevices/index.html app/build/reports/androidTests/managedDevice/debug/flavors/demo/allDevices/${{matrix.device-config}}.html
+
       - name: Upload Gradle Managed device test results
         uses: actions/upload-artifact@v4
         with:
-          name: testResults
-          path: app/build/reports/androidTests/managedDevice/debug/flavors/demo/allDevices/index.html
+          name: testResults${{matrix.device-config}}
+          path: app/build/reports/androidTests/managedDevice/debug/flavors/demo/allDevices/${{matrix.device-config}}.html
 
 #      - name: Build projects and run instrumentation tests
 #        uses: reactivecircus/android-emulator-runner@v2
