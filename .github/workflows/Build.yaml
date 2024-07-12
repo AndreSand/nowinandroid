@@ -153,7 +153,8 @@ jobs:
     timeout-minutes: 90
     strategy:
       matrix:
-        device-config: [ "pixel4api30aosp-atd","pixel6api31aosp","pixelCapi30aosp-atd"]
+#        device-config: [ "pixel4api30aosp-atd","pixel6api31aosp","pixelCapi30aosp-atd"]
+        device-config: [ "pixel6api31aosp"]
 
     steps:
       - name: Delete unnecessary tools 🔧
