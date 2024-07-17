@@ -1,0 +1,31 @@
+workspaces:
+  - name: default-workspace
+tasks:
+  - name: android-clone-build
+    taskSpec:
+      workspaces:
+        - name: default-workspace
+      results:
+        - name: test-results
+      steps:
+        - name: clone-source
+          ref:
+            resolver: default
+            name: catalog://git-clone:v0
+          params:
+            - name: url
+              value: "https://github.com/android/nowinandroid.git"
+            - name: revision
+              value: main
+            - name: source
+              value: $(workspaces.default-workspace.path)
+
+        - name: build-app
+          image: us-docker.pkg.dev/android-devrel-ci/us.gcr.io/android-build:tag2
+          securityContext:
+            privileged: true
+          script: |
+            #!/usr/bin/env bash
+            cd $(workspaces.default-workspace.path)
+            ./gradlew pixel4api30aospatdDemoDebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true -Pandroid.experimental.testOptions.managedDevices.maxConcurrentDevices=1 -Pandroid.experimental.testOptions.managedDevices.setupTimeoutMinutes=180
+
